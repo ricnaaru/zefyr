@@ -164,8 +164,8 @@ class InputConnectionController implements TextInputClient {
   TextInputConnection _textInputConnection;
   TextEditingValue _lastKnownRemoteTextEditingValue;
 
-  @override
-  void updateFloatingCursor(RawFloatingCursorPoint point) {
+//  @override
+//  void updateFloatingCursor(RawFloatingCursorPoint point) {
     // TODO: implement updateFloatingCursor
-  }
+//  }
 }

@@ -254,7 +254,7 @@ class _ImageButtonState extends State<ImageButton> {
     return toolbar.buildButton(
       context,
       ZefyrToolbarAction.image,
-      onPressed: showOverlay,
+      onPressed: _pickFromGallery,
     );
   }
 
@@ -268,8 +268,8 @@ class _ImageButtonState extends State<ImageButton> {
     final buttons = Row(
       children: <Widget>[
         SizedBox(width: 8.0),
-        toolbar.buildButton(context, ZefyrToolbarAction.cameraImage,
-            onPressed: _pickFromCamera),
+//        toolbar.buildButton(context, ZefyrToolbarAction.cameraImage,
+//            onPressed: _pickFromCamera),
         toolbar.buildButton(context, ZefyrToolbarAction.galleryImage,
             onPressed: _pickFromGallery),
       ],
@@ -459,17 +459,25 @@ class _LinkButtonState extends State<LinkButton> {
       ];
       items.addAll(buttons);
     }
-    final trailingPressed = isEditing ? doneEdit : closeOverlay;
+
     final trailingAction =
-        isEditing ? ZefyrToolbarAction.confirm : ZefyrToolbarAction.close;
+        isEditing ? Row(children: [toolbar.buildButton(
+          context,
+          ZefyrToolbarAction.confirm,
+          onPressed: doneEdit,
+        ), toolbar.buildButton(
+          context,
+          ZefyrToolbarAction.close,
+          onPressed: closeOverlay,
+        )]) : toolbar.buildButton(
+          context,
+          ZefyrToolbarAction.close,
+          onPressed: closeOverlay,
+        );
 
     return ZefyrToolbarScaffold(
       body: Row(children: items),
-      trailing: toolbar.buildButton(
-        context,
-        trailingAction,
-        onPressed: trailingPressed,
-      ),
+      trailing: trailingAction,
     );
   }
 }
